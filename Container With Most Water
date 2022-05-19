@@ -1,0 +1,37 @@
+class Solution {
+    public int maxArea(int[] height) {
+        int max_area = 0;
+        int a_pointer = 0;
+        int b_pointer = height.length-1;
+        int length = 0;
+        int count = 0;
+        int[] areas = new int[height.length];
+        
+        //a = 0 , b= 8, area = 7
+        //a = 1, b = 8, area = 7
+        //
+        while(a_pointer < b_pointer){
+            if(height[a_pointer] < height[b_pointer]){
+            max_area = (b_pointer - a_pointer) * height[a_pointer];
+                a_pointer++;
+            }
+            
+            else if(height[a_pointer] > height[b_pointer]){
+            max_area = (b_pointer - a_pointer) * height[b_pointer];
+                b_pointer--;
+            }
+            
+            else if(height[a_pointer] == height[b_pointer]){
+            max_area = (b_pointer - a_pointer) * height[a_pointer];
+                a_pointer++;
+            }
+            areas[count] = max_area;
+            count++;
+            
+        }
+        
+        Arrays.sort(areas);
+        
+        return areas[height.length-1];
+    }
+}
